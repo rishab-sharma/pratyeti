@@ -1,0 +1,43 @@
+* {
+	box-sizing: border-box;
+}
+body { 
+	margin: 0; 
+	padding: 0; 
+}
+#map { 
+	position: absolute; 
+	top: 0; 
+	bottom: 0; 
+	width: 100%; 
+}
+#box {
+	position: absolute;
+	top: 10px;
+	bottom: 25px;
+	right: -290px;
+	width: 320px;
+	padding: 15px 30px;
+	overflow-y: auto;
+	border-top-left-radius: 3px;
+	border-bottom-left-radius: 3px;
+	border-top: 1px solid rgba(0,0,0,0.3);
+	border-left: 1px solid rgba(0,0,0,0.3);
+	border-bottom: 1px solid rgba(0,0,0,0.3);
+	background: rgba(255,255,255,0.75);
+	transition: all 250ms;
+	.knob {
+		position: absolute;
+		height: 20px;
+		line-height: 20px;
+		top: calc(50% - 10px);
+		left: 5px;
+		transition: opacity 250ms;
+	}
+	&:hover {
+		transform: translateX(-290px);
+		.knob {
+			opacity: 0;
+		}
+	}
+}

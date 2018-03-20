@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Mapbox - Multiple Markers</title>
+  
+  
+  <style type="text/css">
+  	
+*{
+  padding: 0px;
+  margin: 0px;
+}
+
+.home-page{
+        position: fixed;
+        top: 0;
+        left: 5vw;
+        z-index: 10;
+        color: #fff;
+      }
+      .home-page a{
+        color: #fff;
+      }
+
+
+html , body{
+  height: 100%;
+  width: 100%;
+}
+#graphDiv .plot-container.plotly{
+
+    height: 100vh;
+    width: 100vw;
+}
+ .plot-container.plotly .svg-container{
+      height: 100vh !important;
+      width: 100vw !important;
+    }
+
+ .svg-container .gl-container .mapboxgl-map{
+          width: 100vw !important;
+          height: 100vh !important;
+          top: 0px !important;
+          left: 0px !important;
+        }
+
+ .svg-container .gl-container .mapboxgl-canvas{
+          width: 100vw !important;
+          height: 100vh !important;
+        }
+      
+
+
+.svg-container .main-svg{
+        height: 100vh;
+        width: 100vw;
+}
+
+.main-svg .infolayer .g-gtitle{
+            display: none;
+          }
+.infolayer .legend rect.bg{
+              fill: rgba(0, 0, 0, 0) !important;
+            }
+
+            
+  .infolayer .annotation{
+            display: none;
+          }
+        
+.modebar-btn.plotlyjsicon.modebar-btn--logo , .modebar-btn.active
+{
+  display: none;
+}
+
+a[data-title="Reset view"]
+{
+  display: none;
+}
+
+  	
+  </style>
+  
+  
+</head>
+
+<body>
+
+  <html>
+<head>
+  <!-- Plotly.js -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+  <div class="home-page"><a href="/"> <h1>प्रत्येति(Believe)</h1></a></div>
+
+
+  
+<!-- Plotly chart will be drawn inside this DIV -->
+<div id="graphDiv"></div>
+  <script>
+  /* JAVASCRIPT CODE GOES HERE */
+  </script>
+</div>
+</body>
+</html>
+  
+  
+
+    <script  src="{{ url_for('static',filename='js_data/index.js') }}"></script>
+
+
+
+
+</body>
+
+</html>

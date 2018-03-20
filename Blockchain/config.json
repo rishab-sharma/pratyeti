@@ -1,0 +1,9 @@
+{
+  "database" : {
+    "username" : "user1",
+    "password" : "user1",
+    "hostname" : "ds263988.mlab.com",
+    "port" : "63988",
+    "dbname": "blockchain"
+  }
+}

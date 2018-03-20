@@ -1,0 +1,58 @@
+*{
+  padding: 0px;
+  margin: 0px;
+}
+html , body{
+  height: 100%;
+  width: 100%;
+}
+#graphDiv .plot-container.plotly{
+
+    height: 100vh;
+    width: 100vw;
+}
+ .plot-container.plotly .svg-container{
+      height: 100vh !important;
+      width: 100vw !important;
+    }
+
+ .svg-container .gl-container .mapboxgl-map{
+          width: 100vw !important;
+          height: 100vh !important;
+          top: 0px !important;
+          left: 0px !important;
+        }
+
+ .svg-container .gl-container .mapboxgl-canvas{
+          width: 100vw !important;
+          height: 100vh !important;
+        }
+      
+
+
+.svg-container .main-svg{
+        height: 100vh;
+        width: 100vw;
+}
+
+.main-svg .infolayer .g-gtitle{
+            display: none;
+          }
+.infolayer .legend rect.bg{
+              fill: rgba(0, 0, 0, 0) !important;
+            }
+
+            
+  .infolayer .annotation{
+            display: none;
+          }
+        
+.modebar-btn.plotlyjsicon.modebar-btn--logo , .modebar-btn.active
+{
+  display: none;
+}
+
+a[data-title="Reset view"]
+{
+  display: none;
+}

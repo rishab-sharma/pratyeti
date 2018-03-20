@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Mapbox Clusters Example</title>
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+
+  <link rel='stylesheet prefetch' href='https://api.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css'>
+
+      <link rel="stylesheet" href="{{ url_for('static',filename='css_cluster/style.css') }}">
+
+
+<style type="text/css">
+	.home-page{
+        position: fixed;
+        top: 10px;
+        left: 5vw;
+        z-index: 10;
+        color: #fff;
+      }
+      .home-page a{
+        color: #fff;
+        font-size: 1.6em;
+      }
+
+</style>
+  
+</head>
+
+<body>
+  <div class="home-page"><a href="/"> <h1>प्रत्येति(Believe)</h1></a></div>
+
+
+  <div id="map" class="map"></div>
+  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.js'></script>
+  
+  <script  src="{{ url_for('static',filename='js_cluster/index.js') }}"></script>
+
+</body>
+
+</html>

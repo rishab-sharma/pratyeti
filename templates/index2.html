@@ -1,0 +1,501 @@
+  <!DOCTYPE html>
+  <html lang="en" >
+
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <title>Mapbox Animated Routing</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript"></script>
+
+  <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.css' rel='stylesheet' />
+
+  <script src='https://pastebin.com/raw/5jrrfCqG'></script>
+
+
+  <style type="text/css">
+    
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  #map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+  }
+
+  #plotter-input {
+    position: fixed;
+    top: 25px;
+    left: 50px;
+    width: 300px;
+    height: 20px;
+  }
+
+  #plotter-button {
+    position: fixed;
+    top: 25px;
+    left: 360px;
+    width: 100px;
+    height: 25px;
+  }
+
+  .leaflet-control-attribution.leaflet-control
+  {
+    display: none;
+  }
+
+  .overlay{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    z-index: 5;
+    background-color: rgba(0,0,0,0.20);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  h1{
+    margin-top: 50px !important;
+    padding: 0px !important;
+    text-align: center !important;
+    font-size: 5em !important;
+
+  }
+  .button {
+      background-color: #4CAF50; /* Green */
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin-bottom: 30px;
+
+  }
+
+  .button:hover{
+    background-color: #9e3c3c; /* Green */
+  }
+
+
+
+  .contain-all-shades{
+    height: 75vh;
+    width: 70vw;
+    box-sizing: border-box;
+    padding: 3vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+  }
+
+
+  .upper , .lower{
+    width: 100%;
+    height: 47%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+  }
+
+
+  .inner{
+    width: 30%;
+    height: 100%;
+    background-color: rgba(181,181,181,0.41);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    display: none;
+  }
+
+
+  .img-here{
+    width: 100%;
+    height: 80%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    
+  }
+
+  .img-here a{
+     width: 95%;
+     height: 95%;
+     text-decoration: none;
+     display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .img-here a img{
+      max-width: 80%;
+      max-height: 80%;
+    }
+
+
+
+
+
+  .cap-here{
+    width: 100%;
+    height: 20%;
+    border-top: 1px solid #fff;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+
+
+
+
+  .inner:hover{
+    background-color: rgba(181,181,181,0.61);
+  ;
+  }
+
+
+  </style>
+
+
+
+
+  </head>
+
+  <body>
+
+    <div id="map">
+
+    <div class="overlay">
+
+    <h1>प्रत्येति(Believe)</h1>
+
+
+    <div class="contain-all-shades">
+
+    <div class="upper">
+      
+      <div class="inner">
+            <div class="img-here">
+               <a href="http://172.20.10.4:3001/bc">
+  <img src="https://png.icons8.com/metro/1600/bookmark.png">
+  </a>
+            </div>
+            <div class="cap-here">
+              First Information Report
+            </div>
+      </div>
+      <div class="inner">
+        <div class="img-here">
+     <a href="/route_map">
+          <img src="https://image.flaticon.com/icons/png/512/32/32226.png">
+     </a>
+        </div>
+        <div class="cap-here">
+            Safe Route
+        </div>
+      </div>
+    
+     
+      <div class="inner">
+        <div class="img-here">
+    <a href="/sos1">
+          <img src="https://d30y9cdsu7xlg0.cloudfront.net/png/21424-200.png">
+  </a>
+        </div>
+        <div class="cap-here">
+          Save Our Souls
+        </div>
+      </div>
+    </div>
+    <div class="lower">
+      <div class="inner">
+        <div class="img-here">
+              <a href="/cluster">
+
+          <img src="http://cdn.onlinewebfonts.com/svg/img_425617.png">
+  </a>
+        </div>
+
+        <div class="cap-here">
+            Cluster Plot
+        </div>
+      </div>
+      <div class="inner">
+        <div class="img-here">
+            <a href="/heat">
+
+          <img src="http://cdn.onlinewebfonts.com/svg/img_509838.png">
+  </a>
+        </div>
+        <div class="cap-here">
+            Heat Plot
+        </div>
+      </div>
+      <div class="inner">
+        <div class="img-here">
+            <a href="/data">
+
+          <img src="https://www.anarkismo.net/attachments/sep2014/policekhutsongtragedy.png">
+  </a>
+        </div>
+        <div class="cap-here">
+            Individual Crime Plot
+        </div>
+      </div>
+    </div>
+
+
+    </div>
+
+    <button type="button" class="button">
+      Lets's Go
+    </button>
+    </div>
+
+    </div>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+
+
+  <script type="text/javascript">
+  L.mapbox.accessToken = 'pk.eyJ1IjoiZXJ3YW5sZW50IiwiYSI6IjA4YzY2Zjg2OTBkNDY5MDEyODBmN2RkOTdjMDc0NTY0In0.NY4En8vkN8h4JvlSDlhLfw';
+  var map = L.mapbox.map('map', 'ian-cintric.fc32b7db', {
+  zoomControl: false
+  }).setView([25.4358, 81.8463], 13);
+
+  // map.on('click', function(e) {
+  //   console.log(e.latlng);
+  //   var marker = new L.marker(e.latlng).addTo(map);
+  // });
+
+  setTimeout(test, 500);
+
+  $('#plotter-button').click(function() {
+  var coordinatesToAdd = $('#plotter-input').val();
+  var lat = Number(coordinatesToAdd.split(',')[0].trim());
+  var lon = Number(coordinatesToAdd.split(',')[1].trim());
+
+  $('#plotter-input').val('');
+  var marker = new L.marker(L.latLng(lat, lon)).addTo(map);
+  });
+
+  function test() {
+  var startLocation = {
+    lon: 81.8463,
+    lat: 25.4358
+  };
+
+  var endLocation = {
+    lon: 81.769400,
+    lat: 25.430873
+  };
+
+  var route = getRoute(startLocation, endLocation, function(route) {
+    plotRoute(route);
+  });
+  }
+
+  function getRoute(startLocation, endLocation, callback) {
+  var url = 'https://api.mapbox.com/directions/v5/mapbox/driving/{0},{1};{2},{3}?access_token={4}';
+  url = url.format(startLocation.lon, startLocation.lat, endLocation.lon, endLocation.lat, L.mapbox.accessToken);
+  $.get(url, function(response) {
+    // Response validation
+    if (response.code != "Ok") {
+      callback();
+      return;
+    }
+
+    var route = {
+      duration: response.routes[0].duration,
+      distance: response.routes[0].distance,
+      decodedPolyline: polyline.decode(response.routes[0].geometry)
+    };
+
+    callback(route);
+  });
+  }
+
+  var routePlotAmount;
+
+  function plotRoute(route) {
+  //http://leafletjs.com/reference.html#path-options
+  var routePath = [];
+  var allRouteIntermediaryPoints = [];
+
+  routePlotAmount = route.distance / 40;
+
+  for (var i = 0; i < route.decodedPolyline.length; i++) {
+    routePath.push(L.latLng(route.decodedPolyline[i][0], route.decodedPolyline[i][1]));
+    //new L.marker(L.latLng(route.decodedPolyline[i][0], route.decodedPolyline[i][1])).addTo(map);
+
+    if (i + 1 < route.decodedPolyline.length) {
+      var lineStartLocation = {
+        lat: route.decodedPolyline[i][0],
+        lon: route.decodedPolyline[i][1]
+      };
+
+      var lineEndLocation = {
+        lat: route.decodedPolyline[i + 1][0],
+        lon: route.decodedPolyline[i + 1][1]
+      };
+
+      var distanceOfLine = L.latLng(lineStartLocation.lat, lineStartLocation.lon).distanceTo(L.latLng(lineEndLocation.lat, lineEndLocation.lon));
+      var numOfPointsOnLineAmount = Math.ceil((distanceOfLine * (routePlotAmount / route.distance)));
+      var pointsToPlot = getIntermediatePointsOnLine(lineStartLocation, lineEndLocation, numOfPointsOnLineAmount);
+
+      allRouteIntermediaryPoints.push.apply(allRouteIntermediaryPoints, pointsToPlot);
+    }
+  }
+
+  // Draw route with low opacity
+  var basePolyline = L.polyline(routePath, {
+    color: '#a0c658',
+    opacity: .3
+  });
+
+  map.fitBounds(basePolyline.getBounds());
+
+  // Animate route
+  animateRoute(allRouteIntermediaryPoints, 0);
+  }
+
+  function getIntermediatePointsOnLine(lineStartLocation, lineEndLocation, numOfPointsOnLineAmount) {
+  var intermediatePoints = [];
+  intermediatePoints.push(lineStartLocation);
+
+  for (var i = 0; i <= numOfPointsOnLineAmount; i++) {
+    var calculatedLocation = calculatePointOnLine(intermediatePoints[intermediatePoints.length - 1], lineEndLocation, i, numOfPointsOnLineAmount);
+    intermediatePoints.push(calculatedLocation);
+  }
+
+  return intermediatePoints;
+  }
+
+  function calculatePointOnLine(lineStartLocation, lineEndLocation, k, numOfPointsOnLineAmount) {
+  var calculatedLat = (k * ((lineEndLocation.lat - lineStartLocation.lat) / numOfPointsOnLineAmount)) + lineStartLocation.lat;
+  var calculatedLon = (k * ((lineEndLocation.lon - lineStartLocation.lon) / numOfPointsOnLineAmount)) + lineStartLocation.lon;
+
+  return {
+    lat: calculatedLat,
+    lon: calculatedLon
+  };
+  }
+
+  var animatedRouteLines = [];
+  var currentLocationMarker;
+
+  function animateRoute(routePoints, pathIndex) {
+  if (pathIndex + 1 < routePoints.length) {
+    //new L.marker(L.latLng(routePoints[i].lat, routePoints[i].lon)).addTo(map);
+
+    var currentPoint = L.latLng(routePoints[pathIndex].lat, routePoints[pathIndex].lon);
+    var nextPoint = L.latLng(routePoints[pathIndex + 1].lat, routePoints[pathIndex + 1].lon);
+
+    var routePath = [];
+    routePath.push(currentPoint);
+    routePath.push(nextPoint);
+
+    var distanceToNextMarker = currentPoint.distanceTo(nextPoint);
+    var nextTimeout = distanceToNextMarker / 4;
+
+    // Delete current location marker
+    if (currentLocationMarker) {
+      map.removeLayer(currentLocationMarker);
+    }
+
+    // Add current location marker
+    currentLocationMarker = new L.circleMarker(nextPoint, {
+      radius: 8,
+      color: '#fff',
+      fillColor: '#fff',
+      fillOpacity: .6,
+      opacity: 1,
+      weight: 2
+    }).addTo(map);
+
+    // Add route
+    var animatedLine = L.polyline(routePath, {
+      color: '#3498db',
+      opacity: 1,
+      weight: 4
+    }).addTo(map);
+
+    animatedRouteLines.push(animatedLine);
+
+    if (nextTimeout < 1) {
+      animateRoute(routePoints, pathIndex + 1);
+      return;
+    }
+
+    setTimeout(function() {
+      animateRoute(routePoints, pathIndex + 1);
+    }, nextTimeout)
+  } else {
+    setTimeout(function() {
+      clearAnimatedRoute();
+      setTimeout(function() {
+        animateRoute(routePoints, 0);
+      }, 500);
+    }, 1000)
+  }
+  }
+
+  function clearAnimatedRoute() {
+  if (currentLocationMarker) {
+    map.removeLayer(currentLocationMarker);
+  }
+
+  for (var i = 0; i < animatedRouteLines.length; i++) {
+    map.removeLayer(animatedRouteLines[i]);
+  }
+
+  animatedRouteLines = [];
+  }
+
+  if (!String.prototype.format) {
+  String.prototype.format = function() {
+    var args = arguments;
+    return this.replace(/{(\d+)}/g, function(match, number) {
+      return typeof args[number] != 'undefined' ?
+        args[number] :
+        match;
+    });
+  };
+  }
+
+
+
+  document.getElementsByClassName("button")[0].addEventListener("click" , function(){
+    this.style.display = "none";
+
+    var divs = document.getElementsByClassName("inner");
+
+    for (var i = 0; i < divs.length; i++) {
+      divs[i].style.display = "block";
+    }
+
+    document.getElementsByClassName("overlay")[0].style.backgroundColor = "rgba(0,0,0,0.80)";
+
+
+  } );
+
+  </script>
+
+  </body>
+
+  </html>

@@ -1,0 +1,10 @@
+.map {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+
+}
+.mapboxgl-ctrl-logo , .mapboxgl-ctrl-bottom-right{
+display: none !important;
+}

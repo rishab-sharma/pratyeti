@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script
+          src="https://code.jquery.com/jquery-2.2.4.min.js"
+          integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+          crossorigin="anonymous"></script>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">-->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" crossorigin="anonymous"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.4/js/standalone/selectize.js" integrity="sha256-YhmtrYJDSZgZFL8jDCR8VNOV/iigJPZYNCk8L9J72Hk=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.4/css/selectize.css" integrity="sha256-HzWsbetzuScwBVnRYZIRJeXPQjHvyAMWhukery/8L8A=" crossorigin="anonymous" />
+
+
+
+  <script>
+  $(function() {
+      $('#crime-type').selectize({
+        create: true,
+        sortField: 'text'
+      });
+
+});
+
+</script>
+    <meta charset="UTF-8">
+    <title>Pratyati</title>
+</head>
+
+<body>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <h1>Welcome to प्रत्यति</h1>
+      <h2>The blockChain way of reporting Crime</h2>
+    </div>
+    <div class="col-md-6 col-md-offset-3">
+      <button type="button" name="button" class="btn btn-primary" id="new-fir-btn">Lodge a New FIR</button>
+      <button type="button" name="button" class="btn btn-primary">Get Details of an FIR</button>
+      <br><br>
+      <div class="form">
+        <div class="form-group">
+          <label for="Name">Full Name:</label>
+          <input type="text" class="form-control" id="Name">
+        </div>
+        <div class="form-group">
+          <label for="phone-number">Your Phone Number:</label>
+          <input type="number" name="" value="" class="form-control" id="phone-number" required>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="report-date">Date of Reported crime:</label>
+              <input type="date" name="" value="" class="form-control" id="report-date">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="report-time">Time of Reported crime:</label>
+              <input type="time" name="" value="" class="form-control" id="report-time">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="crime-type">Type of Crime</label>
+          <select id="crime-type" name="" >
+                <option value=""></option>
+                <option value="rape">Sexual Assault</option>
+                <option value="kidnap">Kidnapping</option>
+                <option value="hit and run">Hit and Run</option>
+                <option value="chain">Chain-Snatching</option>
+                <option value="Robbery">Robbery</option>
+                <option value="Murder">Murder</option>
+
+          </select>
+        </div>
+        <div class="form-group" id="new-fir-form">
+          <label for="location"> Location of the Crime(use the map)</label>
+          <div class="row">
+            <div class="col-md-9">
+                <input type="text" name="" id="location" value="" class="form-control">
+            </div>
+            <div class="col-md-2">
+              <button type="button" class="btn btn-info" id="searchbtn">
+                <span class="glyphicon glyphicon-search"></span> Search
+              </button>
+            </div>
+          </div>
+
+
+          <br>
+          <div id="map" class="map col-md-12" >
+
+          </div>
+          <label for="lat" class=""> Latitude: </label><span id="lat"></span>
+
+          <br>
+          <label for="long" class="f"> Longitude: </label><span id="long"></span>
+        </div>
+        <div class="form-group">
+          <label for="description">Give us as many details you can about the crime</label>
+          <textarea name="name" rows="8" cols="80" class="form-control" id="description"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="submit"></label>
+          <button type="submit" value="Submit" class="btn btn-primary" id="submit" data-toggle="modal" data-target="#2-stepModal">Submit</button>
+
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="loader-custom" id="loader">
+  <div class="loader-background"></div>
+  <div class="container">
+    <div class="dot dot-1"></div>
+    <div class="dot dot-2"></div>
+    <div class="dot dot-3"></div>
+  </div>
+</div>
+
+<div class="modal" id="2-stepModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" style="display: inline-block; font-size: 2em">2-Step Verification</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" style="font-size: 2em">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="font-size: 1.3em">
+        <div class="form-group">
+          <label for="otp">Please Enter the 4 digit OTP Received on <span id="modal_mobile">+91-9999999999</span></label>
+          <input type="text" class="form-control" id="otp" style="width: 30%; margin-top: 10px; margin-left: 35%;">
+          <p class="text-danger" id="incorrect-msg"></p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="otp-submit">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    let map;
+    let curr_marker;
+    let $lat = $('#lat');
+    let $long = $('#long');
+    let police_station_arr =[
+        [27.4730,76.8783],
+        [26.4730,75.8785],
+        [27.4732,75.8783],
+        [26.4732,76.8735]
+    ];
+    (function () {
+      $('#new-fir-btn').click(function(){
+        $('.form').css('display','block');
+      });
+        let $search_btn = $('#searchbtn');
+        $search_btn.click(function () {
+            $('#loader').addClass('is-active');
+           let location = $('#location').val();
+           let req_param = location.split(' ').join('+');
+           $.get('https://maps.googleapis.com/maps/api/geocode/json?address='+req_param+'&key=AIzaSyBMp0uJ_VjsHraJFBQuu9_YLmhSuLjHV-g', function (result) {
+               if(result.results.length === 0){
+                   alert("Could Not Find the Location Entered By You... Either Enter a New Location or Try By Clicking at the Location on the Map..");
+                   $('#loader').removeClass('is-active');
+                   return;
+               }
+               let lat_lng = result.results[0].geometry.location;
+               console.log(lat_lng);
+               if(curr_marker) {curr_marker.setMap(null)};
+               curr_marker = new google.maps.Marker({
+                   position: lat_lng,
+                   map: map
+               });
+               map.setZoom(17);
+               map.panTo(curr_marker.position);
+               $lat.html(lat_lng.lat);
+               $long.html(lat_lng.lng);
+               $('#loader').removeClass('is-active');
+           })
+        });
+
+    })();
+
+    function addClickonMap() {
+        google.maps.event.addListener(map, "click", function (e) {
+            let latLng = e.latLng;
+            if(curr_marker) curr_marker.setMap(null);
+            curr_marker = new google.maps.Marker({
+                position: {lat : latLng.lat(), lng : latLng.lng()},
+                map: map
+            });
+            $lat.html(latLng.lat());
+            $long.html(latLng.lng());
+
+        });
+
+    }
+
+    let $submit = $('#submit');
+    let $Name = $('#Name');
+    let $report_date = $('#report-date');
+    let $report_time = $('#report-time');
+    let $type_crime = $('#crime-type');
+    let $details = $('#description');
+    let $phone_number = $('#phone-number');
+    let $loader = $('#loader');
+
+    $submit.click(function () {
+
+        $loader.addClass('is-active');
+        let Name = $Name.val();
+        let report_date = $report_date.val();
+        let report_time = $report_time.val();
+        let hours = report_time.split(':')[0];
+        let minutes = report_time.split(':')[1];
+        let type_crime = $type_crime.val();
+        let details = $details.val();
+        let phone_number = $phone_number.val();
+        phone_number = '+91' + phone_number;
+        let lat = $lat.html();
+        let lng = $long.html();
+        $.post('/send', {number : phone_number}, function (result) {
+            if(result.status == 0){
+                let id = result.request_id;
+                $('#modal_mobile').html(phone_number);
+                $loader.removeClass('is-active');
+                $("#otp-submit").click(function () {
+                    let otp = $('#otp').val();
+                    $loader.addClass('is-active');
+                    $.post('/verify', {requestId : id, code : otp}, function (result) {
+                        $loader.removeClass('is-active');
+                        if(result.status == 0){
+                            findNearestPolice_Station(lat, lng, function (index) {
+                                let police_station = police_station_arr[index];
+                                let objtbsent = {
+                                    "name" : Name,
+                                    "phone_number" : phone_number,
+                                    "date" : report_date,
+                                    "hours" : hours,
+                                    "minutes" : minutes,
+                                    "crime" : type_crime,
+                                    "details" : details,
+                                    "location" : [lat, lng],
+                                    "police_station" : police_station
+                                };
+                                let data = JSON.stringify(objtbsent);
+
+                                $.post('/mineBlock', {data: data}, function (result) {
+                                    console.log(result);
+                                    location.reload();
+                                });
+                            });
+                        }else{
+                           alert("The OTP Entered By You is Incorrect...");
+                        }
+                    })
+                });
+            }else{
+                console.log("Please Enter a Valid Phone Number");
+            }
+        });
+
+
+
+    });
+
+    function findDistance(lat1, lat2, long1, long2) {
+        let latsqdiff = (lat2 - lat1) * (lat2 - lat1);
+        let lngsqdiff = (long2 - long1) * (long2 - long1);
+        let sum = latsqdiff + lngsqdiff;
+        return Math.sqrt(sum);
+    }
+
+    function findNearestPolice_Station(lat, long, callback) {
+        let min_distance = Number.MAX_SAFE_INTEGER;
+        let min_index = 0;
+        let i = 0;
+        while(true) {
+            console.log("Hi i = ", i);
+            let distance = findDistance(lat, police_station_arr[i][0], long, police_station_arr[i][1]);
+            if (distance < min_distance){
+                min_distance = distance;
+                min_index = i;
+            }
+            if(i === police_station_arr.length - 1){
+                callback(min_index);
+                break;
+            }
+            i++;
+        }
+
+    }
+
+    function initMap() {
+
+        if(navigator.geolocation){
+
+            navigator.geolocation.getCurrentPosition(function (lat_lng) {
+              console.log("sth21");
+                let uluru = {lat: lat_lng.coords.latitude, lng: lat_lng.coords.longitude};
+                map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 17,
+                    center: uluru
+                });
+                if(curr_marker) curr_marker.setMap(null);
+                curr_marker = new google.maps.Marker({
+                    position: uluru,
+                    map: map
+                });
+                $lat.html(uluru.lat);
+                $long.html(uluru.lng);
+                addClickonMap();
+            });
+        }
+
+    }
+
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMp0uJ_VjsHraJFBQuu9_YLmhSuLjHV-g&callback=initMap">
+</script>
+
+</body>
+
+<style media="screen">
+
+ h1,h2{
+   text-align: center;
+ }
+
+ #map{
+   height: 500px;
+   border: 1px solid black;
+ }
+
+ .form{
+   display: none;
+ }
+
+ .loader-custom{
+   width: 100%;
+   height: 100%;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   top: 0;
+   -webkit-box-align: center;
+   -ms-flex-align: center;
+   align-items: center;
+   display: none;
+   -webkit-box-pack: center;
+   -ms-flex-pack: center;
+   justify-content: center;
+   overflow: hidden;
+   position: fixed;
+   z-index: 2000;
+ }
+
+ .loader-custom.is-active{
+   display: block;
+ }
+
+ .loader-background{
+   bottom: 0;
+   left: 0;
+   position: absolute;
+   right: 0;
+   top: 0;
+   background-color: rgba(10,10,10,.86);
+ }
+
+ .container {
+   z-index: 100;
+   width: 200px;
+   height: 200px;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   margin: auto;
+   filter: url('#goo');
+   animation: rotate-move 2s ease-in-out infinite;
+ }
+
+ .dot {
+   width: 70px;
+   height: 70px;
+   border-radius: 50%;
+   background-color: #000;
+   position: absolute;
+   top: 0;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   margin: auto;
+ }
+
+ .dot-3 {
+   background-color: #f74d75;
+   animation: dot-3-move 2s ease infinite, index 6s ease infinite;
+ }
+
+ .dot-2 {
+   background-color: #10beae;
+   animation: dot-2-move 2s ease infinite, index 6s -4s ease infinite;
+ }
+
+ .dot-1 {
+   background-color: #ffe386;
+   animation: dot-1-move 2s ease infinite, index 6s -2s ease infinite;
+ }
+
+ @keyframes dot-3-move {
+   20% {transform: scale(1)}
+   45% {transform: translateY(-18px) scale(.45)}
+   60% {transform: translateY(-90px) scale(.45)}
+   80% {transform: translateY(-90px) scale(.45)}
+   100% {transform: translateY(0px) scale(1)}
+ }
+
+ @keyframes dot-2-move {
+   20% {transform: scale(1)}
+   45% {transform: translate(-16px, 12px) scale(.45)}
+   60% {transform: translate(-80px, 60px) scale(.45)}
+   80% {transform: translate(-80px, 60px) scale(.45)}
+   100% {transform: translateY(0px) scale(1)}
+ }
+
+ @keyframes dot-1-move {
+   20% {transform: scale(1)}
+   45% {transform: translate(16px, 12px) scale(.45)}
+   60% {transform: translate(80px, 60px) scale(.45)}
+   80% {transform: translate(80px, 60px) scale(.45)}
+   100% {transform: translateY(0px) scale(1)}
+ }
+
+ @keyframes rotate-move {
+   55% {transform: translate(-50%, -50%) rotate(0deg)}
+   80% {transform: translate(-50%, -50%) rotate(360deg)}
+   100% {transform: translate(-50%, -50%) rotate(360deg)}
+ }
+
+ @keyframes index {
+   0%, 100% {z-index: 3}
+   33.3% {z-index: 2}
+   66.6% {z-index: 1}
+ }
+
+</style>
+
+</html>

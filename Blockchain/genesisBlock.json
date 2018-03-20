@@ -1,0 +1,23 @@
+{
+  "index" : 0,
+  "date" : "YYYY-MM-DD",
+  "minutes" : "00",
+  "hours" : "00",
+  "previousHash": null,
+  "timestamp": 1520794572531,
+  "data": {
+    "police_station": [
+      "00.000000",
+      "00.000000"
+    ],
+    "location": [
+      "00.000000",
+      "00.000000"
+    ],
+    "crime": "murder",
+    "details": "this is genesis block"
+  },
+  "hash": "56360bfb8218a44dd9943b4f7ea8a4ef80109e067c9d9da3dc7605be50126abb",
+  "difficulty": 1,
+  "nonce": 0
+}
